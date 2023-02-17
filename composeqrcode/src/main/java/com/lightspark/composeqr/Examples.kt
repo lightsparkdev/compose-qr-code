@@ -125,12 +125,7 @@ fun SmileyLightSquarePreview() {
 fun BoringPreview() {
     QrCodeView(
         data = URL_DATA,
-        modifier = Modifier.size(300.dp),
-        colors = QrCodeColors(
-            background = Color.White,
-            foreground = Color.Black
-        ),
-        dotShape = DotShape.Square,
+        modifier = Modifier.size(300.dp)
     )
 }
 

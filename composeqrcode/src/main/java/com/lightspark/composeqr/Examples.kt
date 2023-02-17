@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,23 +16,31 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+private const val URL_DATA = "https://lightspark.com/?doesnotmatter=this-is-a-test-of-longer-urls-to-see-how-it-looks"
 
 @Composable
-private fun Smile() {
-    Canvas(modifier = Modifier.fillMaxSize(fraction = 0.5f)) {
-        // Draw a smiley face
+private fun Smile(
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = Color.Black,
+    smileColor: Color = Color.White
+) {
+    Canvas(modifier = modifier) {
         drawCircle(
-            color = Color.Black,
+            color = backgroundColor,
             center = Offset(size.width / 2, size.height / 2),
             radius = size.width / 2
         )
         drawCircle(
-            color = Color.White,
+            color = smileColor,
             center = Offset(
                 size.width / 2 - size.width / 4,
                 size.height / 2 - size.height / 4
@@ -39,7 +48,7 @@ private fun Smile() {
             radius = size.width / 8
         )
         drawCircle(
-            color = Color.White,
+            color = smileColor,
             center = Offset(
                 size.width / 2 + size.width / 4,
                 size.height / 2 - size.height / 4
@@ -47,7 +56,7 @@ private fun Smile() {
             radius = size.width / 8
         )
         drawArc(
-            color = Color.White,
+            color = smileColor,
             startAngle = 0f,
             sweepAngle = 180f,
             useCenter = false,
@@ -61,9 +70,9 @@ private fun Smile() {
 
 @Preview(showBackground = true)
 @Composable
-fun SmilyDarkPreview() {
+fun SmileyDarkPreview() {
     QrCodeView(
-        "https://lightspark.com/this-is-a-test-of-longer-urls-to-see-how-it-looks",
+        data = URL_DATA,
         modifier = Modifier.size(300.dp),
         colors = QrCodeColors(
             background = Color.Black,
@@ -81,16 +90,16 @@ fun SmilyDarkPreview() {
                     .clip(RoundedCornerShape(8.dp))
                     .background(Color.Green)
             ) {
-                Smile()
+                Smile(modifier = Modifier.fillMaxSize(0.5f))
             }
         })
 }
 
 @Preview(showBackground = true)
 @Composable
-fun SmilyLightSquarePreview() {
+fun SmileyLightSquarePreview() {
     QrCodeView(
-        "https://lightspark.com/this-is-a-test-of-longer-urls-to-see-how-it-looks",
+        data = URL_DATA,
         modifier = Modifier.size(300.dp),
         colors = QrCodeColors(
             background = Color.White,
@@ -100,28 +109,42 @@ fun SmilyLightSquarePreview() {
         overlayContent = {
             Box(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(16.dp))
-                    .background(Color.White)
-                    .padding(8.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .background(Color.Green)
+                modifier = Modifier.fillMaxSize()
             ) {
-                Smile()
+                Smile(
+                    modifier = Modifier.fillMaxSize(),
+                    backgroundColor = Color.Yellow,
+                    smileColor = Color.Black
+                )
             }
         })
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ColorfulStarOverlay() {
+fun BoringPreview() {
     QrCodeView(
-        "https://lightspark.com/this-is-a-test-of-longer-urls-to-see-how-it-looks",
+        data = URL_DATA,
         modifier = Modifier.size(300.dp),
         colors = QrCodeColors(
-            background = Color.Blue,
-            foreground = Color.Yellow
+            background = Color.White,
+            foreground = Color.Black
+        ),
+        dotShape = DotShape.Square,
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PurpleAndGold() {
+    val purple = Color(0xFF552583)
+    val gold = Color(0xFFFDB927)
+    QrCodeView(
+        data = URL_DATA,
+        modifier = Modifier.size(300.dp),
+        colors = QrCodeColors(
+            background = purple,
+            foreground = gold
         ),
         dotShape = DotShape.Circle,
         overlayContent = {
@@ -130,24 +153,18 @@ fun ColorfulStarOverlay() {
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(CircleShape)
-                    .background(Color.Blue)
+                    .background(purple)
             ) {
-                Canvas(modifier = Modifier.fillMaxSize(0.5f)) {
-                    val coolArrow = Path().apply {
-                        moveTo(0f, 0f)
-                        lineTo(size.width / 2, size.height / 2)
-                        lineTo(0f, size.height)
-                        lineTo(size.width, size.height / 2)
-                        lineTo(size.width / 2, 0f)
-                        lineTo(size.width, size.height / 2)
-                        close()
-                    }
-                    drawPath(
-                        path = coolArrow,
-                        color = Color.White,
-                        style = Fill
+                BasicText(
+                    text = "L",
+                    style = TextStyle.Default.copy(
+                        color = gold,
+                        fontSize = 42.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        fontStyle = FontStyle.Italic,
+                        fontFamily = FontFamily.Serif
                     )
-                }
+                )
             }
         })
 }

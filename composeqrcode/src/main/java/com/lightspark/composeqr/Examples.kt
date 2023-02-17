@@ -25,7 +25,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-private const val URL_DATA = "https://lightspark.com/?doesnotmatter=this-is-a-test-of-longer-urls-to-see-how-it-looks"
+private const val URL_DATA =
+    "https://lightspark.com/?doesnotmatter=this-is-a-test-of-longer-urls-to-see-how-it-looks"
 
 @Composable
 private fun Smile(
@@ -67,6 +68,14 @@ private fun Smile(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun BoringPreview() {
+    QrCodeView(
+        data = URL_DATA,
+        modifier = Modifier.size(300.dp)
+    )
+}
 
 @Preview(showBackground = true)
 @Composable
@@ -78,21 +87,21 @@ fun SmileyDarkPreview() {
             background = Color.Black,
             foreground = Color.White
         ),
-        dotShape = DotShape.Circle,
-        overlayContent = {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(Color.White)
-                    .padding(8.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(Color.Green)
-            ) {
-                Smile(modifier = Modifier.fillMaxSize(0.5f))
-            }
-        })
+        dotShape = DotShape.Circle
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(8.dp))
+                .background(Color.White)
+                .padding(8.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(Color.Green)
+        ) {
+            Smile(modifier = Modifier.fillMaxSize(0.5f))
+        }
+    }
 }
 
 @Preview(showBackground = true)
@@ -105,28 +114,14 @@ fun SmileyLightSquarePreview() {
             background = Color.White,
             foreground = Color.Black
         ),
-        dotShape = DotShape.Square,
-        overlayContent = {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Smile(
-                    modifier = Modifier.fillMaxSize(),
-                    backgroundColor = Color.Yellow,
-                    smileColor = Color.Black
-                )
-            }
-        })
-}
-
-@Preview(showBackground = true)
-@Composable
-fun BoringPreview() {
-    QrCodeView(
-        data = URL_DATA,
-        modifier = Modifier.size(300.dp)
-    )
+        dotShape = DotShape.Square
+    ) {
+        Smile(
+            modifier = Modifier.fillMaxSize(),
+            backgroundColor = Color.Yellow,
+            smileColor = Color.Black
+        )
+    }
 }
 
 @Preview(showBackground = true)
@@ -141,25 +136,25 @@ fun PurpleAndGold() {
             background = purple,
             foreground = gold
         ),
-        dotShape = DotShape.Circle,
-        overlayContent = {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(CircleShape)
-                    .background(purple)
-            ) {
-                BasicText(
-                    text = "L",
-                    style = TextStyle.Default.copy(
-                        color = gold,
-                        fontSize = 42.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontStyle = FontStyle.Italic,
-                        fontFamily = FontFamily.Serif
-                    )
+        dotShape = DotShape.Circle
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(CircleShape)
+                .background(purple)
+        ) {
+            BasicText(
+                text = "L",
+                style = TextStyle.Default.copy(
+                    color = gold,
+                    fontSize = 42.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontStyle = FontStyle.Italic,
+                    fontFamily = FontFamily.Serif
                 )
-            }
-        })
+            )
+        }
+    }
 }

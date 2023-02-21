@@ -9,7 +9,22 @@ __A simple, flexible QR code renderer for Jetpack Compose - by *Lightspark*__
 
 ## Usage
 
-Here's a plain ol' boring QR Code:
+First install it from Maven Central:
+
+Groovy:
+```groovy
+dependencies {
+    implementation "com.lightspark:compose-qr-code:1.0.1"
+}
+```
+kts:
+```kotlin
+dependencies {
+    implementation("com.lightspark:compose-qr-code:1.0.1")
+}
+```
+
+Then, use it in your code! Here's a plain ol' boring QR Code:
 
 <table>
 <tr>

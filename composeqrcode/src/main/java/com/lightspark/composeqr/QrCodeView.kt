@@ -72,7 +72,7 @@ fun QrCodeView(
     dotShape: DotShape = DotShape.Square,
     encoder: QrEncoder = QrEncoder()
 ) {
-    val encodedData = remember { encoder(data) }
+    val encodedData = remember(data, encoder) { encoder(data) }
 
     Canvas(modifier = modifier.background(colors.background)) {
         encodedData?.let { matrix ->

@@ -1,6 +1,6 @@
 # Compose QR Code
 
-![Maven Central](https://img.shields.io/maven-central/v/com.lightspark/compose-qr-code)
+[![Maven Central](https://img.shields.io/maven-central/v/com.lightspark/compose-qr-code)](https://central.sonatype.com/artifact/com.lightspark/compose-qr-code/1.0.1)
 
 __A simple, flexible QR code renderer for Jetpack Compose - by *Lightspark*__
 

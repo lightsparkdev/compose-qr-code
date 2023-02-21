@@ -36,7 +36,7 @@ fun QrCodeView(
     modifier: Modifier = Modifier,
     colors: QrCodeColors = QrCodeColors.default(),
     dotShape: DotShape = DotShape.Square,
-    encoder: QrEncoder = QrEncoder(),
+    encoder: QrEncoder = ZxingQrEncoder(),
     overlayContent: (@Composable () -> Unit)? = null,
 ) {
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
@@ -70,9 +70,9 @@ fun QrCodeView(
     modifier: Modifier = Modifier,
     colors: QrCodeColors = QrCodeColors.default(),
     dotShape: DotShape = DotShape.Square,
-    encoder: QrEncoder = QrEncoder()
+    encoder: QrEncoder = ZxingQrEncoder()
 ) {
-    val encodedData = remember(data, encoder) { encoder(data) }
+    val encodedData = remember(data, encoder) { encoder.encode(data) }
 
     Canvas(modifier = modifier.background(colors.background)) {
         encodedData?.let { matrix ->

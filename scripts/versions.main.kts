@@ -10,7 +10,7 @@ import kotlin.system.exitProcess
 
 
 if (runCommand("git", "status", "--porcelain").isNotEmpty()) {
-    println("Your git repo is not clean. Make sur to stash or commit your changes before making a release")
+    println("Your git repo is not clean. Make sure to stash or commit your changes before making a release")
     exitProcess(1)
 }
 
